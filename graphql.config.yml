@@ -1,0 +1,4 @@
+schema: schema.graphql
+extensions:
+  endpoints:
+    dev: http://localhost:1337/graphql
