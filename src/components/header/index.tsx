@@ -25,9 +25,12 @@ const Header = async () => {
           </div>
         </header>
         <div className={'flex flex-wrap gap-x-5 gap-y-10 justify-center'}>
-          <Button size="lg" className={'animate-fade-in'}>
-            Démarrons un projet
-          </Button>
+          <a
+            href="mailto:hello@gaylordjulien.dev?subject=Besoin%20d'information&body=Bonjour%2C%0A%0A"
+            className={'animate-fade-in'}
+          >
+            <Button size="lg">Démarrons un projet</Button>
+          </a>
           <a href="#services" className={'animate-fade-in lg:hidden'}>
             <Button variant="outline" size="lg">
               En savoir plus <ChevronDownIcon className={'w-6 h-6 ml-2'} />
