@@ -8,7 +8,7 @@ schema {
 "Indicates exactly one field must be supplied and this field must not be `null`."
 directive @oneOf on INPUT_OBJECT
 
-union GenericMorph = ComponentHomepageHeader | ComponentHomepageIntro | Homepage | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = ComponentHomepageHeader | ComponentHomepageIntro | ComponentSharedMetaSocial | ComponentSharedSeo | Homepage | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type ComponentHomepageHeader {
     content: String
@@ -23,6 +23,27 @@ type ComponentHomepageIntro {
     title: String
 }
 
+type ComponentSharedMetaSocial {
+    description: String!
+    id: ID!
+    image: UploadFile
+    socialNetwork: ENUM_COMPONENTSHAREDMETASOCIAL_SOCIALNETWORK!
+    title: String!
+}
+
+type ComponentSharedSeo {
+    canonicalURL: String
+    id: ID!
+    keywords: String
+    metaDescription: String!
+    metaImage: UploadFile
+    metaRobots: String
+    metaSocial(filters: ComponentSharedMetaSocialFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedMetaSocial]
+    metaTitle: String!
+    metaViewport: String
+    structuredData: JSON
+}
+
 type DeleteMutationResponse {
     documentId: ID!
 }
@@ -33,6 +54,7 @@ type Homepage {
     header: ComponentHomepageHeader
     intro(filters: ComponentHomepageIntroFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentHomepageIntro]
     publishedAt: DateTime
+    seo: ComponentSharedSeo
     updatedAt: DateTime
 }
 
@@ -273,6 +295,11 @@ type UsersPermissionsUserRelationResponseCollection {
     nodes: [UsersPermissionsUser!]!
 }
 
+enum ENUM_COMPONENTSHAREDMETASOCIAL_SOCIALNETWORK {
+    Facebook
+    Twitter
+}
+
 enum PublicationStatus {
     DRAFT
     PUBLISHED
@@ -328,6 +355,36 @@ input ComponentHomepageIntroInput {
     id: ID
     image: ID
     title: String
+}
+
+input ComponentSharedMetaSocialFiltersInput {
+    and: [ComponentSharedMetaSocialFiltersInput]
+    description: StringFilterInput
+    not: ComponentSharedMetaSocialFiltersInput
+    or: [ComponentSharedMetaSocialFiltersInput]
+    socialNetwork: StringFilterInput
+    title: StringFilterInput
+}
+
+input ComponentSharedMetaSocialInput {
+    description: String
+    id: ID
+    image: ID
+    socialNetwork: ENUM_COMPONENTSHAREDMETASOCIAL_SOCIALNETWORK
+    title: String
+}
+
+input ComponentSharedSeoInput {
+    canonicalURL: String
+    id: ID
+    keywords: String
+    metaDescription: String
+    metaImage: ID
+    metaRobots: String
+    metaSocial: [ComponentSharedMetaSocialInput]
+    metaTitle: String
+    metaViewport: String
+    structuredData: JSON
 }
 
 input DateTimeFilterInput {
@@ -391,6 +448,7 @@ input HomepageInput {
     intro: [ComponentHomepageIntroInput]
     locale: String
     publishedAt: DateTime
+    seo: ComponentSharedSeoInput
 }
 
 input I18NLocaleFiltersInput {

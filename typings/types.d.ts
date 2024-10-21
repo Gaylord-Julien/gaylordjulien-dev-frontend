@@ -81,6 +81,65 @@ export type ComponentHomepageIntroInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ComponentSharedMetaSocial = {
+  __typename?: 'ComponentSharedMetaSocial';
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  image?: Maybe<UploadFile>;
+  socialNetwork: Enum_Componentsharedmetasocial_Socialnetwork;
+  title: Scalars['String']['output'];
+};
+
+export type ComponentSharedMetaSocialFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentSharedMetaSocialFiltersInput>>>;
+  description?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentSharedMetaSocialFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSharedMetaSocialFiltersInput>>>;
+  socialNetwork?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentSharedMetaSocialInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['ID']['input']>;
+  socialNetwork?: InputMaybe<Enum_Componentsharedmetasocial_Socialnetwork>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentSharedSeo = {
+  __typename?: 'ComponentSharedSeo';
+  canonicalURL?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  keywords?: Maybe<Scalars['String']['output']>;
+  metaDescription: Scalars['String']['output'];
+  metaImage?: Maybe<UploadFile>;
+  metaRobots?: Maybe<Scalars['String']['output']>;
+  metaSocial?: Maybe<Array<Maybe<ComponentSharedMetaSocial>>>;
+  metaTitle: Scalars['String']['output'];
+  metaViewport?: Maybe<Scalars['String']['output']>;
+  structuredData?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type ComponentSharedSeoMetaSocialArgs = {
+  filters?: InputMaybe<ComponentSharedMetaSocialFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentSharedSeoInput = {
+  canonicalURL?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+  metaDescription?: InputMaybe<Scalars['String']['input']>;
+  metaImage?: InputMaybe<Scalars['ID']['input']>;
+  metaRobots?: InputMaybe<Scalars['String']['input']>;
+  metaSocial?: InputMaybe<Array<InputMaybe<ComponentSharedMetaSocialInput>>>;
+  metaTitle?: InputMaybe<Scalars['String']['input']>;
+  metaViewport?: InputMaybe<Scalars['String']['input']>;
+  structuredData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type DateTimeFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
@@ -110,6 +169,11 @@ export type DeleteMutationResponse = {
   __typename?: 'DeleteMutationResponse';
   documentId: Scalars['ID']['output'];
 };
+
+export enum Enum_Componentsharedmetasocial_Socialnetwork {
+  Facebook = 'Facebook',
+  Twitter = 'Twitter',
+}
 
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars['String']['input']>;
@@ -145,6 +209,8 @@ export type FloatFilterInput = {
 export type GenericMorph =
   | ComponentHomepageHeader
   | ComponentHomepageIntro
+  | ComponentSharedMetaSocial
+  | ComponentSharedSeo
   | Homepage
   | I18NLocale
   | ReviewWorkflowsWorkflow
@@ -161,6 +227,7 @@ export type Homepage = {
   header?: Maybe<ComponentHomepageHeader>;
   intro?: Maybe<Array<Maybe<ComponentHomepageIntro>>>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  seo?: Maybe<ComponentSharedSeo>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -175,6 +242,7 @@ export type HomepageInput = {
   intro?: InputMaybe<Array<InputMaybe<ComponentHomepageIntroInput>>>;
   locale?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  seo?: InputMaybe<ComponentSharedSeoInput>;
 };
 
 export type I18NLocale = {
