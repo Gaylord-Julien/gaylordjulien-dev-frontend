@@ -5,7 +5,7 @@ const Introduction = async () => {
   const { intro } = await getIntroduction();
 
   return (
-    <section className={'bg-surface py-10 container'} id={'services'}>
+    <section className={'bg-surface py-10 container rounded-lg'} id={'services'}>
       <h2
         className={'text-white text-center text-4xl font-medium mb-16 mt-10 mb-24 tracking-tighter'}
       >

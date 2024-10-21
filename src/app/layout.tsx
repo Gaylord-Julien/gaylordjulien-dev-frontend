@@ -63,7 +63,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
         <PlausibleProvider
           taggedEvents
           trackOutboundLinks
-          domain={process.env.NEXT_PUBLIC_PROD_URL}
+          domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
           enabled
           customDomain={'https://pble.gaylordjulien.dev'}
           trackLocalhost={false}
