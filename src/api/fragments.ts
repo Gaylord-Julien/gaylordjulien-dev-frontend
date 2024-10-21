@@ -10,4 +10,30 @@ fragment ImageFragment on UploadFile {
 }
 `;
 
-export { IMAGE_FRAGMENT };
+const SEO_FRAGMENT = `#graphql
+fragment SeoFragment on ComponentSharedSeo {
+    structuredData
+    metaTitle
+    metaDescription
+    metaImage {
+        width
+        url
+        alternativeText
+    }
+    metaSocial {
+        id
+        socialNetwork
+        title
+        description
+        image {
+            url
+            width
+            height
+            mime
+            alternativeText
+        }
+    }
+}
+`;
+
+export { IMAGE_FRAGMENT, SEO_FRAGMENT };
