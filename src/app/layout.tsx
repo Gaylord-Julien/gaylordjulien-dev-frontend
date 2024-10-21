@@ -8,7 +8,7 @@ import Providers from './providers';
 
 // eslint-disable-next-line new-cap
 const interTight = Inter_Tight({
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
   subsets: ['latin'],
   variable: '--font-inter-tight',

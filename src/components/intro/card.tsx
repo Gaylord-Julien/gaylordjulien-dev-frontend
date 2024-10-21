@@ -1,6 +1,20 @@
 import { ComponentHomepageIntro, Maybe } from '@/typings/types';
 import Image from 'next/image';
 
+const boldParser = (text: string) => {
+  const regex = /\*\*(.*?)\*\*/g;
+  return text.split(regex).map((part, index) => {
+    if (index % 2 === 0) {
+      return part;
+    }
+    return (
+      <span className={'font-semibold'} key={index}>
+        {part}
+      </span>
+    );
+  });
+};
+
 const Card = ({ item }: { item: Maybe<ComponentHomepageIntro> }) => {
   const { id, image, title, content } = item ?? {};
   const { url, alternativeText, width, height } = image ?? {};
@@ -12,7 +26,9 @@ const Card = ({ item }: { item: Maybe<ComponentHomepageIntro> }) => {
         </div>
       )}
       <h2 className={'text-white text-center text-2xl'}>{title}</h2>
-      <p className={'text-white text-center w-8/12 mx-auto'}>{content}</p>
+      <p className={'text-white w-8/12 mx-auto font-extralight text-center'}>
+        {boldParser(content ?? '')}
+      </p>
     </div>
   );
 };
