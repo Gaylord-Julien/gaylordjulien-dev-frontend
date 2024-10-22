@@ -9,11 +9,11 @@ const Website = ({ item }: { item: Maybe<ComponentHomepageTrust> }) => {
   return (
     <section
       className={
-        'bg-surface container rounded-lg mt-10 px-10 py-10 mb-44 lg:px-24 lg:py-24 w-11/12 mx-auto'
+        'bg-surface container rounded-lg mt-10 px-10 py-20 mb-44 lg:px-24 lg:py-24 w-11/12 mx-auto'
       }
       id={'services'}
     >
-      <div className={'flex flex-col gap-y-10'}>
+      <div className={'flex flex-col gap-y-10 lg:gap-y-0'}>
         <div className={'col-span-12 flex flex-col gap-y-5 lg:grid grid-cols-12 gap-x-20'}>
           <div className={'col-span-4 self-center'}>
             <Block description={description as BlocksContent} />
