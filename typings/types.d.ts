@@ -81,6 +81,45 @@ export type ComponentHomepageIntroInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ComponentHomepageTrust = {
+  __typename?: 'ComponentHomepageTrust';
+  description?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  screenshot: Array<Maybe<UploadFile>>;
+  screenshot_connection?: Maybe<UploadFileRelationResponseCollection>;
+  title?: Maybe<Scalars['String']['output']>;
+  website?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentHomepageTrustScreenshotArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentHomepageTrustScreenshot_ConnectionArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentHomepageTrustFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentHomepageTrustFiltersInput>>>;
+  description?: InputMaybe<JsonFilterInput>;
+  not?: InputMaybe<ComponentHomepageTrustFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentHomepageTrustFiltersInput>>>;
+  title?: InputMaybe<StringFilterInput>;
+  website?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentHomepageTrustInput = {
+  description?: InputMaybe<Scalars['JSON']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  screenshot?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ComponentSharedMetaSocial = {
   __typename?: 'ComponentSharedMetaSocial';
   description: Scalars['String']['output'];
@@ -209,6 +248,7 @@ export type FloatFilterInput = {
 export type GenericMorph =
   | ComponentHomepageHeader
   | ComponentHomepageIntro
+  | ComponentHomepageTrust
   | ComponentSharedMetaSocial
   | ComponentSharedSeo
   | Homepage
@@ -228,11 +268,18 @@ export type Homepage = {
   intro?: Maybe<Array<Maybe<ComponentHomepageIntro>>>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   seo?: Maybe<ComponentSharedSeo>;
+  trust?: Maybe<Array<Maybe<ComponentHomepageTrust>>>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type HomepageIntroArgs = {
   filters?: InputMaybe<ComponentHomepageIntroFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type HomepageTrustArgs = {
+  filters?: InputMaybe<ComponentHomepageTrustFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -243,6 +290,7 @@ export type HomepageInput = {
   locale?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   seo?: InputMaybe<ComponentSharedSeoInput>;
+  trust?: InputMaybe<Array<InputMaybe<ComponentHomepageTrustInput>>>;
 };
 
 export type I18NLocale = {
@@ -824,6 +872,11 @@ export type UploadFileFiltersInput = {
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   url?: InputMaybe<StringFilterInput>;
   width?: InputMaybe<IntFilterInput>;
+};
+
+export type UploadFileRelationResponseCollection = {
+  __typename?: 'UploadFileRelationResponseCollection';
+  nodes: Array<UploadFile>;
 };
 
 export type UsersPermissionsCreateRolePayload = {

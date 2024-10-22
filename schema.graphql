@@ -8,7 +8,7 @@ schema {
 "Indicates exactly one field must be supplied and this field must not be `null`."
 directive @oneOf on INPUT_OBJECT
 
-union GenericMorph = ComponentHomepageHeader | ComponentHomepageIntro | ComponentSharedMetaSocial | ComponentSharedSeo | Homepage | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = ComponentHomepageHeader | ComponentHomepageIntro | ComponentHomepageTrust | ComponentSharedMetaSocial | ComponentSharedSeo | Homepage | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type ComponentHomepageHeader {
     content: String
@@ -21,6 +21,15 @@ type ComponentHomepageIntro {
     id: ID!
     image: UploadFile
     title: String
+}
+
+type ComponentHomepageTrust {
+    description: JSON
+    id: ID!
+    screenshot(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UploadFile]!
+    screenshot_connection(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+    title: String
+    website: String
 }
 
 type ComponentSharedMetaSocial {
@@ -55,6 +64,7 @@ type Homepage {
     intro(filters: ComponentHomepageIntroFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentHomepageIntro]
     publishedAt: DateTime
     seo: ComponentSharedSeo
+    trust(filters: ComponentHomepageTrustFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentHomepageTrust]
     updatedAt: DateTime
 }
 
@@ -198,6 +208,10 @@ type UploadFile {
 type UploadFileEntityResponseCollection {
     nodes: [UploadFile!]!
     pageInfo: Pagination!
+}
+
+type UploadFileRelationResponseCollection {
+    nodes: [UploadFile!]!
 }
 
 type UsersPermissionsCreateRolePayload {
@@ -357,6 +371,23 @@ input ComponentHomepageIntroInput {
     title: String
 }
 
+input ComponentHomepageTrustFiltersInput {
+    and: [ComponentHomepageTrustFiltersInput]
+    description: JSONFilterInput
+    not: ComponentHomepageTrustFiltersInput
+    or: [ComponentHomepageTrustFiltersInput]
+    title: StringFilterInput
+    website: StringFilterInput
+}
+
+input ComponentHomepageTrustInput {
+    description: JSON
+    id: ID
+    screenshot: [ID]
+    title: String
+    website: String
+}
+
 input ComponentSharedMetaSocialFiltersInput {
     and: [ComponentSharedMetaSocialFiltersInput]
     description: StringFilterInput
@@ -449,6 +480,7 @@ input HomepageInput {
     locale: String
     publishedAt: DateTime
     seo: ComponentSharedSeoInput
+    trust: [ComponentHomepageTrustInput]
 }
 
 input I18NLocaleFiltersInput {
