@@ -14,14 +14,14 @@ const Header = async () => {
     >
       <div className="relative">
         <header className={'grid grid-cols-1 lg:grid-cols-12 gap-y-10 place-content-center mb-10'}>
-          <div className="col-span-10 font-inter-tight relative mb-3 mt-5 -translate-y-4 animate-fade-in text-balance bg-gradient-to-br from-30% to-black/40 bg-clip-text py-6 text-5xl font-semibold leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] sm:text-6xl md:text-7xl lg:text-8xl">
+          <div className="order-2 lg:order-1 col-span-12 lg:col-start-2 lg:col-span-7 font-inter-tight relative mb-3 mt-5 -translate-y-4 animate-fade-in text-center text-balance lg:text-left bg-gradient-to-br from-30% to-black/40 bg-clip-text py-6 text-5xl font-semibold leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] sm:text-6xl md:text-7xl lg:text-8xl">
             <h1 className={s.title}>{header?.title}</h1>
           </div>
-          <div className="pointer-events-none col-span-2 animate-fade-in">
+          <div className="hidden lg:block col-span-4 pointer-events-none animate-fade-in order-1 lg:order-2">
             <Image src={homeImage} alt="home" />
           </div>
-          <div className={'col-span-6 col-start-4 animate-fade-in text-center'}>
-            <p className="text-lg font-light text-white">{header?.content}</p>
+          <div className={'col-span-6 col-start-4 animate-fade-in text-center order-3'}>
+            <p className="text-lg font-extralight text-white">{header?.content}</p>
           </div>
         </header>
         <div className={'flex flex-wrap gap-x-5 gap-y-10 justify-center'}>
