@@ -64,3 +64,45 @@ body, html {
     color: hsl(var(--primary-foreground));
     background: hsl(var(--primary));
 }
+
+.embla {
+    max-width: 48rem;
+    margin: auto;
+}
+
+.embla__viewport {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-left: -1rem; /* Equivalent to the slide spacing */
+}
+
+.embla__slide[data-embla="mutlitple-image"] {
+    transform: translate3d(0, 0, 0);
+    min-width: 100%; /* Default: 1 slide visible on mobile */
+    padding-left: 1rem; /* Slide spacing */
+}
+
+.embla__slide__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .embla__slide__inner {
+        height: 500px;
+    }
+}
+
+.embla__slide[data-embla="mutlitple-image"] img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Ensure the image covers the slide area */
+}
