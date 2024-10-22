@@ -19,7 +19,7 @@ const Card = ({ item }: { item: Maybe<ComponentHomepageIntro> }) => {
   const { id, image, title, content } = item ?? {};
   const { url, alternativeText, width, height } = image ?? {};
   return (
-    <div key={id} className={'col-span-3 flex flex-col gap-y-5'}>
+    <div key={id} className={'col-span-6 flex flex-col gap-y-5'}>
       {url && (
         <div className={'flex justify-center'}>
           <Image src={url} alt={alternativeText ?? ''} width={width ?? 0} height={height ?? 0} />

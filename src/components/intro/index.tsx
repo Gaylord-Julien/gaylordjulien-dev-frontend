@@ -5,10 +5,8 @@ const Introduction = async () => {
   const { intro } = await getIntroduction();
 
   return (
-    <section className={'bg-surface py-10 container rounded-lg'} id={'services'}>
-      <h2
-        className={'text-white text-center text-4xl font-medium mb-16 mt-10 mb-24 tracking-tighter'}
-      >
+    <section className={'bg-surface py-10 container rounded-lg pb-28 w-11/12'} id={'services'}>
+      <h2 className={'text-white text-center text-4xl font-medium mb-20 mt-12 tracking-tighter'}>
         Je vous propose
       </h2>
       <div className={'grid grid-cols-1 lg:grid-cols-12 gap-y-10'}>
