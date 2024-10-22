@@ -3,6 +3,7 @@ import Introduction from '@/components/intro';
 import { Metadata } from 'next';
 import { getHomepageSeo } from '@/api/homepageSeo';
 import generateSeo from '@/common/utils/seo';
+import Trust from '@/components/trust';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getHomepageSeo();
@@ -20,6 +21,7 @@ const Page = () => {
     <main className="flex min-h-screen flex-col items-center justify-start overflow-x-hidden font-inter-tight">
       <Header />
       <Introduction />
+      <Trust />
     </main>
   );
 };
