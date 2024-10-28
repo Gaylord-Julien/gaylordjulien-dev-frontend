@@ -52,11 +52,20 @@ const Form = ({ onSubmit, sending, failed, step, setStep }: FormProps) => {
           )}
           {step === 2 && (
             <div className={'flex justify-between gap-x-5 max-w-72'}>
-              <Button type="button" disabled={sending} onClick={() => setStep(step - 1)}>
+              <Button
+                variant={'secondary'}
+                type="button"
+                disabled={sending}
+                onClick={() => setStep(step - 1)}
+              >
                 Précédent
               </Button>
 
-              <Button type="submit" disabled={(!canGoToStep2 && !canGoToStep1) || sending}>
+              <Button
+                variant={'secondary'}
+                type="submit"
+                disabled={(!canGoToStep2 && !canGoToStep1) || sending}
+              >
                 Envoyer
               </Button>
             </div>

@@ -45,7 +45,7 @@ const Header = async () => {
             >
               <DialogHeader>
                 <DialogTitle>Votre projet commence ici</DialogTitle>
-                <DialogDescription className={'pt-5'}>
+                <DialogDescription className={'pt-5 text-white'}>
                   <ContactForm />
                 </DialogDescription>
               </DialogHeader>

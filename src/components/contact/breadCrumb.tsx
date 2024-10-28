@@ -23,7 +23,7 @@ const FormBreadCrumb = ({ step, setStep }: FormBreadCrumbProps) => {
         <BreadcrumbItem>
           <button
             className={clsx('disabled:cursor-not-allowed flex gap-x-2 items-center', {
-              'text-foreground font-semibold': step === 0,
+              'text-white font-semibold': step === 0,
             })}
             type="button"
             onClick={() => {
@@ -39,7 +39,7 @@ const FormBreadCrumb = ({ step, setStep }: FormBreadCrumbProps) => {
         <BreadcrumbItem>
           <button
             className={clsx('disabled:cursor-not-allowed flex gap-x-2 items-center', {
-              'text-foreground font-semibold': step === 1,
+              'text-white font-semibold': step === 1,
             })}
             disabled={!canGoToStep1}
             type="button"
@@ -52,7 +52,7 @@ const FormBreadCrumb = ({ step, setStep }: FormBreadCrumbProps) => {
         <BreadcrumbItem>
           <button
             className={clsx('disabled:cursor-not-allowed flex gap-x-2 items-center', {
-              'text-foreground font-semibold': step === 2,
+              'text-white font-semibold': step === 2,
             })}
             disabled={!canGoToStep2 || !canGoToStep1}
             type="button"

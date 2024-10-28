@@ -21,6 +21,7 @@ const Buttons = ({ isValidStep, sending, setStep, step }: ButtonsProps) => {
           type="button"
           hidden={step === 2}
           disabled={sending || !isValidStep}
+          variant={'secondary'}
           onClick={() => {
             if (step <= 2) {
               setStep(step + 1);
