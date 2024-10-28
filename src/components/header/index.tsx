@@ -4,6 +4,15 @@ import homeImage from '@/public/home_1_1c9d6af75c.svg';
 import Image from 'next/image';
 import { Button } from '@/common/buttons';
 import { ChevronDownIcon } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/common/dialog';
+import ContactForm from '@/components/contact';
 
 const Header = async () => {
   const { header } = await getHeader();
@@ -25,12 +34,23 @@ const Header = async () => {
           </div>
         </header>
         <div className={'flex flex-wrap gap-x-5 gap-y-10 justify-center'}>
-          <a
-            href="mailto:hello@gaylordjulien.dev?subject=Besoin%20d'information&body=Bonjour%2C%0A%0A"
-            className={'animate-fade-in'}
-          >
-            <Button size="lg">Démarrons un projet</Button>
-          </a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="lg">Démarrons un projet</Button>
+            </DialogTrigger>
+            <DialogContent
+              className={
+                'w-11/12 sm:max-w-[425px] max-h-[650px] lg:max-w-[780px] lg:w-[850px] lg:max-h-[650px]'
+              }
+            >
+              <DialogHeader>
+                <DialogTitle>Votre projet commence ici</DialogTitle>
+                <DialogDescription className={'pt-5'}>
+                  <ContactForm />
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
           <a href="#services" className={'animate-fade-in lg:hidden'}>
             <Button variant="outline" size="lg">
               En savoir plus <ChevronDownIcon className={'w-6 h-6 ml-2'} />

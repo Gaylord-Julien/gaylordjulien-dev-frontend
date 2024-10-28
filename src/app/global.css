@@ -9,6 +9,7 @@ a:link {
 body, html {
     background-color: #0d0c0c;
     scroll-behavior: smooth !important;
+    @apply font-inter-tight;
 }
 
 @layer base {
