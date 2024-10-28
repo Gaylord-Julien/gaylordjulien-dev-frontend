@@ -24,7 +24,9 @@ const Form = ({ onSubmit, sending, failed, step, setStep }: FormProps) => {
   const canGoToStep2 = useIsValidStep(['message', 'dataProcessing']);
   return (
     <form
-      className={'grid grid-cols-1 grid-rows-2 grid-flow-row-dense gap-y-5 w-full mt-5 h-[600px]'}
+      className={
+        'grid grid-cols-1 grid-rows-2 grid-flow-row-dense gap-y-5 w-full mt-5 h-[600px] lg:px-20'
+      }
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className={'row-start-1 flex gap-y-5 flex-col mt-5'}>
