@@ -8,7 +8,7 @@ schema {
 "Indicates exactly one field must be supplied and this field must not be `null`."
 directive @oneOf on INPUT_OBJECT
 
-union GenericMorph = ComponentHomepageHeader | ComponentHomepageIntro | ComponentHomepageTrust | ComponentSharedMetaSocial | ComponentSharedSeo | Homepage | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = ComponentHomepageHeader | ComponentHomepageIntro | ComponentHomepageTrust | ComponentSharedMetaSocial | ComponentSharedSeo | Homepage | I18NLocale | Message | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Setting | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type ComponentHomepageHeader {
     content: String
@@ -82,9 +82,27 @@ type I18NLocaleEntityResponseCollection {
     pageInfo: Pagination!
 }
 
+type Message {
+    createdAt: DateTime
+    documentId: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    message: String!
+    phone: String
+    publishedAt: DateTime
+    updatedAt: DateTime
+}
+
+type MessageEntityResponseCollection {
+    nodes: [Message!]!
+    pageInfo: Pagination!
+}
+
 type Mutation {
     "Change user password. Confirm with the current password."
     changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+    createMessage(data: MessageInput!, status: PublicationStatus = PUBLISHED): Message
     createReviewWorkflowsWorkflow(data: ReviewWorkflowsWorkflowInput!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
     createReviewWorkflowsWorkflowStage(data: ReviewWorkflowsWorkflowStageInput!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
     "Create a new role"
@@ -92,8 +110,10 @@ type Mutation {
     "Create a new user"
     createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
     deleteHomepage: DeleteMutationResponse
+    deleteMessage(documentId: ID!): DeleteMutationResponse
     deleteReviewWorkflowsWorkflow(documentId: ID!): DeleteMutationResponse
     deleteReviewWorkflowsWorkflowStage(documentId: ID!): DeleteMutationResponse
+    deleteSetting: DeleteMutationResponse
     deleteUploadFile(id: ID!): UploadFile
     "Delete an existing role"
     deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
@@ -109,8 +129,10 @@ type Mutation {
     "Reset user password. Confirm with a code (resetToken from forgotPassword)"
     resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
     updateHomepage(data: HomepageInput!, status: PublicationStatus = PUBLISHED): Homepage
+    updateMessage(data: MessageInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): Message
     updateReviewWorkflowsWorkflow(data: ReviewWorkflowsWorkflowInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
     updateReviewWorkflowsWorkflowStage(data: ReviewWorkflowsWorkflowStageInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
+    updateSetting(data: SettingInput!, status: PublicationStatus = PUBLISHED): Setting
     updateUploadFile(id: ID!, info: FileInfoInput): UploadFile!
     "Update an existing role"
     updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
@@ -131,12 +153,16 @@ type Query {
     i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [I18NLocale]!
     i18NLocales_connection(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): I18NLocaleEntityResponseCollection
     me: UsersPermissionsMe
+    message(documentId: ID!, status: PublicationStatus = PUBLISHED): Message
+    messages(filters: MessageFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [Message]!
+    messages_connection(filters: MessageFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): MessageEntityResponseCollection
     reviewWorkflowsWorkflow(documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
     reviewWorkflowsWorkflowStage(documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
     reviewWorkflowsWorkflowStages(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [ReviewWorkflowsWorkflowStage]!
     reviewWorkflowsWorkflowStages_connection(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStageEntityResponseCollection
     reviewWorkflowsWorkflows(filters: ReviewWorkflowsWorkflowFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [ReviewWorkflowsWorkflow]!
     reviewWorkflowsWorkflows_connection(filters: ReviewWorkflowsWorkflowFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowEntityResponseCollection
+    setting(status: PublicationStatus = PUBLISHED): Setting
     uploadFile(documentId: ID!, status: PublicationStatus = PUBLISHED): UploadFile
     uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UploadFile]!
     uploadFiles_connection(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): UploadFileEntityResponseCollection
@@ -181,6 +207,15 @@ type ReviewWorkflowsWorkflowStageEntityResponseCollection {
 
 type ReviewWorkflowsWorkflowStageRelationResponseCollection {
     nodes: [ReviewWorkflowsWorkflowStage!]!
+}
+
+type Setting {
+    createdAt: DateTime
+    documentId: ID!
+    logo: UploadFile
+    publishedAt: DateTime
+    updatedAt: DateTime
+    websiteName: String
 }
 
 type UploadFile {
@@ -572,6 +607,33 @@ input JSONFilterInput {
     startsWith: JSON
 }
 
+input MessageFiltersInput {
+    and: [MessageFiltersInput]
+    createdAt: DateTimeFilterInput
+    documentId: IDFilterInput
+    email: StringFilterInput
+    firstName: StringFilterInput
+    lastName: StringFilterInput
+    locale: StringFilterInput
+    localizations: MessageFiltersInput
+    message: StringFilterInput
+    not: MessageFiltersInput
+    or: [MessageFiltersInput]
+    phone: StringFilterInput
+    publishedAt: DateTimeFilterInput
+    updatedAt: DateTimeFilterInput
+}
+
+input MessageInput {
+    email: String
+    firstName: String
+    lastName: String
+    locale: String
+    message: String
+    phone: String
+    publishedAt: DateTime
+}
+
 input PaginationArg {
     limit: Int
     page: Int
@@ -623,6 +685,13 @@ input ReviewWorkflowsWorkflowStageInput {
     name: String
     publishedAt: DateTime
     workflow: ID
+}
+
+input SettingInput {
+    locale: String
+    logo: ID
+    publishedAt: DateTime
+    websiteName: String
 }
 
 input StringFilterInput {

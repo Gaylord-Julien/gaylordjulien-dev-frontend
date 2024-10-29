@@ -12,7 +12,12 @@ const Buttons = ({ isValidStep, sending, setStep, step }: ButtonsProps) => {
   return (
     <div className={'flex justify-between gap-x-5 max-w-72'}>
       {step !== 0 && step !== 2 && (
-        <Button type="button" disabled={sending} onClick={() => setStep(step - 1)}>
+        <Button
+          type="button"
+          variant={'secondary'}
+          disabled={sending}
+          onClick={() => setStep(step - 1)}
+        >
           Précédent
         </Button>
       )}

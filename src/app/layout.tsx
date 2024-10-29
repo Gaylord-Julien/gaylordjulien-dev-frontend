@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { Inter_Tight } from 'next/font/google';
 import { ReactNode } from 'react';
 import Providers from './providers';
+import Layout from '@/common/layout';
 
 // eslint-disable-next-line new-cap
 const interTight = Inter_Tight({
@@ -72,6 +73,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
       </head>
       <body>
         <Providers>
+          <Layout />
           <main>{children}</main>
         </Providers>
       </body>

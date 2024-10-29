@@ -253,8 +253,10 @@ export type GenericMorph =
   | ComponentSharedSeo
   | Homepage
   | I18NLocale
+  | Message
   | ReviewWorkflowsWorkflow
   | ReviewWorkflowsWorkflowStage
+  | Setting
   | UploadFile
   | UsersPermissionsPermission
   | UsersPermissionsRole
@@ -398,10 +400,57 @@ export type JsonFilterInput = {
   startsWith?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type Message = {
+  __typename?: 'Message';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  email: Scalars['String']['output'];
+  firstName: Scalars['String']['output'];
+  lastName: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  phone?: Maybe<Scalars['String']['output']>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type MessageEntityResponseCollection = {
+  __typename?: 'MessageEntityResponseCollection';
+  nodes: Array<Message>;
+  pageInfo: Pagination;
+};
+
+export type MessageFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<MessageFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  email?: InputMaybe<StringFilterInput>;
+  firstName?: InputMaybe<StringFilterInput>;
+  lastName?: InputMaybe<StringFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<MessageFiltersInput>;
+  message?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<MessageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<MessageFiltersInput>>>;
+  phone?: InputMaybe<StringFilterInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type MessageInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  firstName?: InputMaybe<Scalars['String']['input']>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
+  createMessage?: Maybe<Message>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   /** Create a new role */
@@ -409,8 +458,10 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteHomepage?: Maybe<DeleteMutationResponse>;
+  deleteMessage?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
+  deleteSetting?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
   /** Delete an existing role */
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
@@ -426,8 +477,10 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateHomepage?: Maybe<Homepage>;
+  updateMessage?: Maybe<Message>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
+  updateSetting?: Maybe<Setting>;
   updateUploadFile: UploadFile;
   /** Update an existing role */
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
@@ -439,6 +492,11 @@ export type MutationChangePasswordArgs = {
   currentPassword: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+export type MutationCreateMessageArgs = {
+  data: MessageInput;
+  status?: InputMaybe<PublicationStatus>;
 };
 
 export type MutationCreateReviewWorkflowsWorkflowArgs = {
@@ -457,6 +515,10 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+export type MutationDeleteMessageArgs = {
+  documentId: Scalars['ID']['input'];
 };
 
 export type MutationDeleteReviewWorkflowsWorkflowArgs = {
@@ -506,6 +568,12 @@ export type MutationUpdateHomepageArgs = {
   status?: InputMaybe<PublicationStatus>;
 };
 
+export type MutationUpdateMessageArgs = {
+  data: MessageInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
 export type MutationUpdateReviewWorkflowsWorkflowArgs = {
   data: ReviewWorkflowsWorkflowInput;
   documentId: Scalars['ID']['input'];
@@ -515,6 +583,11 @@ export type MutationUpdateReviewWorkflowsWorkflowArgs = {
 export type MutationUpdateReviewWorkflowsWorkflowStageArgs = {
   data: ReviewWorkflowsWorkflowStageInput;
   documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateSettingArgs = {
+  data: SettingInput;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -560,12 +633,16 @@ export type Query = {
   i18NLocales: Array<Maybe<I18NLocale>>;
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  message?: Maybe<Message>;
+  messages: Array<Maybe<Message>>;
+  messages_connection?: Maybe<MessageEntityResponseCollection>;
   reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
   reviewWorkflowsWorkflowStages_connection?: Maybe<ReviewWorkflowsWorkflowStageEntityResponseCollection>;
   reviewWorkflowsWorkflows: Array<Maybe<ReviewWorkflowsWorkflow>>;
   reviewWorkflowsWorkflows_connection?: Maybe<ReviewWorkflowsWorkflowEntityResponseCollection>;
+  setting?: Maybe<Setting>;
   uploadFile?: Maybe<UploadFile>;
   uploadFiles: Array<Maybe<UploadFile>>;
   uploadFiles_connection?: Maybe<UploadFileEntityResponseCollection>;
@@ -595,6 +672,25 @@ export type QueryI18NLocalesArgs = {
 
 export type QueryI18NLocales_ConnectionArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryMessageArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryMessagesArgs = {
+  filters?: InputMaybe<MessageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryMessages_ConnectionArgs = {
+  filters?: InputMaybe<MessageFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
@@ -635,6 +731,10 @@ export type QueryReviewWorkflowsWorkflows_ConnectionArgs = {
   filters?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type QuerySettingArgs = {
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -791,6 +891,23 @@ export type ReviewWorkflowsWorkflowStageInput = {
 export type ReviewWorkflowsWorkflowStageRelationResponseCollection = {
   __typename?: 'ReviewWorkflowsWorkflowStageRelationResponseCollection';
   nodes: Array<ReviewWorkflowsWorkflowStage>;
+};
+
+export type Setting = {
+  __typename?: 'Setting';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  logo?: Maybe<UploadFile>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  websiteName?: Maybe<Scalars['String']['output']>;
+};
+
+export type SettingInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  websiteName?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringFilterInput = {

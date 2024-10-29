@@ -18,7 +18,7 @@ const Header = async () => {
   const { header } = await getHeader();
   return (
     <section
-      id="hero"
+      id="header"
       className="relative mx-auto flex lg:mb-52 lg:mt-96 min-h-screen lg:min-h-0 max-w-7xl flex-col justify-center px-6 text-center md:px-8"
     >
       <div className="relative">
