@@ -1,7 +1,7 @@
 import { getSetting } from '@/api/setting';
 import Image from 'next/image';
 
-const Layout = async () => {
+export const Nav = async () => {
   const { setting } = await getSetting();
   const { url, height, width } = setting?.logo ?? {};
   return (
@@ -15,5 +15,3 @@ const Layout = async () => {
     </nav>
   );
 };
-
-export default Layout;

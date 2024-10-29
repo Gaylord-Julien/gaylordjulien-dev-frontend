@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from '@/components/contact/inputs/select';
 import { clsx } from 'clsx';
+import { InputPhone } from '@/components/ui/input-phone';
 
 type DetailsProps = {
   step: number;
@@ -28,7 +29,7 @@ const FormField = ({ name, label, ...rest }: FormFieldProps) => {
 
   return (
     <>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>{label} *</Label>
       <Controller
         name={name}
         control={control}
@@ -71,7 +72,7 @@ const Details = ({ step }: DetailsProps) => {
                   'border-destructive': errors?.gender,
                 })}
               >
-                <SelectValue placeholder="Civilité" />
+                <SelectValue placeholder="Civilité *" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="F">Mme</SelectItem>
@@ -81,9 +82,23 @@ const Details = ({ step }: DetailsProps) => {
             </Select>
           )}
         />
-        <FormField name="lastName" label="Nom" type={'text'} />
-        <FormField name={'firstName'} label={'Prénom'} type={'text'} />
-        <FormField name="email" label="Email" type={'email'} />
+        <FormField name="lastName" label="Nom" type={'text'} placeholder={'Doe'} />
+        <FormField name={'firstName'} label={'Prénom'} type={'text'} placeholder={'John'} />
+        <FormField name="email" label="Email" type={'email'} placeholder={'john@doe.fr'} />
+        <Label htmlFor="phone">Téléphone</Label>
+        <Controller
+          name={'phone'}
+          control={control}
+          render={({ field }) => (
+            <InputPhone
+              value={field.value}
+              onChange={field.onChange}
+              placeholder="0630033530"
+              defaultCountry="FR"
+              limitMaxLength
+            />
+          )}
+        />
       </>
     )
   );

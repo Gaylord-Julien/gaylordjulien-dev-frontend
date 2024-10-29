@@ -2,7 +2,7 @@
 
 import { FormValues } from '@/components/contact/schema';
 
-const sendMessage = async ({ lastName, email, message, firstName, gender }: FormValues) => {
+const sendMessage = async ({ lastName, email, message, firstName, gender, phone }: FormValues) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/messages`, {
       method: 'POST',
@@ -15,6 +15,7 @@ const sendMessage = async ({ lastName, email, message, firstName, gender }: Form
           firstName,
           lastName,
           email,
+          phone,
           message,
           gender,
         },

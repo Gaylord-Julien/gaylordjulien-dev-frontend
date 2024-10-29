@@ -12,6 +12,7 @@ export const schema = z.object({
   email: z
     .string({ message: 'Ce champ est requis' })
     .email({ message: 'Veuillez renseigner un email valide' }),
+  phone: z.string().optional(),
   message: z
     .string({ message: 'Ce champ est requis' })
     .min(10, { message: 'Votre message doit contenir au moins 10 caractères' }),

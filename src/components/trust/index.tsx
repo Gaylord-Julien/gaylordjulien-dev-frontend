@@ -8,7 +8,7 @@ const Trust = async () => {
     <>
       <h2
         className={
-          'text-white text-center text-4xl lg:text-5xl font-medium mt-48 mb-12 tracking-tighter'
+          'text-white text-center text-4xl lg:text-5xl font-extralight mt-48 mb-12 tracking-tighter'
         }
       >
         Ils me font confiance

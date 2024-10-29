@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: ['class'],
   content: ['./src/app/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -6,7 +7,7 @@ module.exports = {
         'inter-tight': ['var(--font-inter-tight)', 'sans-serif'],
       },
       container: {
-        center: true,
+        center: 'true',
         padding: '2rem',
         screens: {
           '2xl': '1400px',
@@ -44,11 +45,30 @@ module.exports = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        chart: {
+          1: 'hsl(var(--chart-1))',
+          2: 'hsl(var(--chart-2))',
+          3: 'hsl(var(--chart-3))',
+          4: 'hsl(var(--chart-4))',
+          5: 'hsl(var(--chart-5))',
+        },
       },
       keyframes: {
         rainbow: {
-          '0%': { 'background-position': '0%' },
-          '100%': { 'background-position': '200%' },
+          '0%': {
+            'background-position': '0%',
+          },
+          '100%': {
+            'background-position': '200%',
+          },
         },
         orbit: {
           '0%': {
@@ -70,12 +90,40 @@ module.exports = {
           },
         },
         'fade-in': {
-          from: { opacity: '0', transform: 'translateY(-10px)' },
-          to: { opacity: '1', transform: 'none' },
+          from: {
+            opacity: '0',
+            transform: 'translateY(-10px)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'none',
+          },
         },
         'fade-up': {
-          from: { opacity: '0', transform: 'translateY(20px)' },
-          to: { opacity: '1', transform: 'none' },
+          from: {
+            opacity: '0',
+            transform: 'translateY(20px)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'none',
+          },
+        },
+        'border-beam': {
+          '100%': {
+            'offset-distance': '100%',
+          },
+        },
+        shine: {
+          '0%': {
+            'background-position': '0% 0%',
+          },
+          '50%': {
+            'background-position': '100% 100%',
+          },
+          to: {
+            'background-position': '0% 0%',
+          },
         },
       },
       animation: {
@@ -90,8 +138,15 @@ module.exports = {
         shimmer: 'shimmer 8s infinite',
         marquee: 'marquee var(--duration) infinite linear',
         'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+        shine: 'shine var(--duration) infinite linear',
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
     },
   },
-  plugins: [],
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require('tailwindcss-animate')],
 };

@@ -5,11 +5,11 @@ import { Metadata } from 'next';
 import { Inter_Tight } from 'next/font/google';
 import { ReactNode } from 'react';
 import Providers from './providers';
-import Layout from '@/common/layout';
+import { Nav } from '@/common/layout';
 
 // eslint-disable-next-line new-cap
 const interTight = Inter_Tight({
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
   subsets: ['latin'],
   variable: '--font-inter-tight',
@@ -73,7 +73,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
       </head>
       <body>
         <Providers>
-          <Layout />
+          <Nav />
           <main>{children}</main>
         </Providers>
       </body>

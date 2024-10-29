@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from '@/common/dialog';
 import ContactForm from '@/components/contact';
+import BlurFade from '@/components/ui/blur-fade';
 
 const Header = async () => {
   const { header } = await getHeader();
@@ -26,11 +27,14 @@ const Header = async () => {
           <div className="order-2 lg:order-1 col-span-12 lg:col-start-2 lg:col-span-7 font-inter-tight relative mb-3 mt-5 -translate-y-4 animate-fade-in text-center text-balance lg:text-left bg-gradient-to-br from-30% to-black/40 bg-clip-text py-6 text-5xl font-semibold leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] sm:text-6xl md:text-7xl lg:text-8xl">
             <h1 className={s.title}>{header?.title}</h1>
           </div>
+
           <div className="hidden lg:block col-span-4 pointer-events-none animate-fade-in order-1 lg:order-2">
             <Image src={homeImage} alt="home" />
           </div>
           <div className={'col-span-6 col-start-4 animate-fade-in text-center order-3'}>
-            <p className="text-lg font-extralight text-white">{header?.content}</p>
+            <BlurFade delay={0.25} inView>
+              <p className="text-lg font-extralight text-white">{header?.content}</p>
+            </BlurFade>
           </div>
         </header>
         <div className={'flex flex-wrap gap-x-5 gap-y-10 justify-center'}>

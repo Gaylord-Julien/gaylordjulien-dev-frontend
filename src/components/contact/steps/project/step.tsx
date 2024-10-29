@@ -16,7 +16,7 @@ const FormField = ({ name, label }: { name: keyof Pick<FormValues, 'message'>; l
 
   return (
     <>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>{label} *</Label>
       <Controller
         name={name}
         control={control}
