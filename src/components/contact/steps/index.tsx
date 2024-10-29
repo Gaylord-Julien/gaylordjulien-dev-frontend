@@ -23,7 +23,7 @@ const Buttons = ({ isValidStep, sending, setStep, step }: ButtonsProps) => {
       )}
       {step < 2 && (
         <Button
-          type="button"
+          type="submit"
           hidden={step === 2}
           disabled={sending || !isValidStep}
           variant={'secondary'}
