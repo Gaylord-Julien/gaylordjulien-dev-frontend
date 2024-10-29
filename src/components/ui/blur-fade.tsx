@@ -1,11 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import type { Variants } from 'framer-motion';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 
 interface BlurFadeProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   variant?: {
     hidden: { y: number };
@@ -15,7 +15,8 @@ interface BlurFadeProps {
   delay?: number;
   yOffset?: number;
   inView?: boolean;
-  inViewMargin?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inViewMargin?: any;
   blur?: string;
 }
 
