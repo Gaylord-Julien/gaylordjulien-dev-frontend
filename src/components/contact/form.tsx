@@ -1,6 +1,5 @@
 'use client';
 import Details from '@/components/contact/steps/infos/step';
-import ErrorMessage from '@/components/contact/errorMessage';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
 import { FormValues } from '@/components/contact/schema';
 import { Dispatch, SetStateAction } from 'react';
@@ -9,6 +8,8 @@ import Summary from '@/components/contact/steps/summary/step';
 import { Button } from '@/common/buttons';
 import useIsValidStep from '@/components/contact/isValidStep';
 import Buttons from '@/components/contact/steps';
+import { Alert, AlertDescription, AlertTitle } from '@/common/alert';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 
 type FormProps = {
   onSubmit: SubmitHandler<FormValues>;
@@ -34,12 +35,13 @@ const Form = ({ onSubmit, sending, failed, step, setStep }: FormProps) => {
       </div>
       <div className={'gap-y-3 flex flex-col h-full'}>
         {failed && (
-          <ErrorMessage
-            error={{
-              message: "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
-              type: 'submit',
-            }}
-          />
+          <Alert variant="destructive">
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>Erreur</AlertTitle>
+            <AlertDescription>
+              Echec de l&apos;envoi du message, veuillez réessayer.
+            </AlertDescription>
+          </Alert>
         )}
         <div className={'flex justify-center mt-10'}>
           {step === 0 && (

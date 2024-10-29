@@ -1,12 +1,17 @@
-import { RocketIcon } from '@radix-ui/react-icons';
+import { Alert, AlertDescription, AlertTitle } from '@/common/alert';
+import { MailIcon } from 'lucide-react';
 
 const Success = () => {
   return (
     <div className={'mb-5'}>
       <h2 className={'flex items-center gap-x-5 tracking-tighter text-2xl mb-5'}>
-        Message bien reçu ! <RocketIcon />
+        Message bien reçu
       </h2>
-      <p>Merci de m&apos;avoir contacté, on se reparle très vite.</p>
+      <Alert>
+        <MailIcon className="h-4 w-4" />
+        <AlertTitle>Merci !</AlertTitle>
+        <AlertDescription>Je reviens vers vous dans les plus brefs délais.</AlertDescription>
+      </Alert>
     </div>
   );
 };
