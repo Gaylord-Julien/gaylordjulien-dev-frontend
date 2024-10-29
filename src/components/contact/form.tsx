@@ -20,21 +20,19 @@ type FormProps = {
 
 const Form = ({ onSubmit, sending, failed, step, setStep }: FormProps) => {
   const { handleSubmit } = useFormContext<FormValues>();
-  const canGoToStep1 = useIsValidStep(['lastName', 'email', 'firstName']);
+  const canGoToStep1 = useIsValidStep(['lastName', 'email', 'firstName', 'gender']);
   const canGoToStep2 = useIsValidStep(['message', 'dataProcessing']);
   return (
     <form
-      className={
-        'grid grid-cols-1 grid-rows-2 grid-flow-row-dense gap-y-5 w-full mt-5 h-[600px] lg:px-20'
-      }
+      className={'flex flex-col gap-y-5 w-full mt-5 lg:px-20'}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className={'row-start-1 flex gap-y-5 flex-col mt-5'}>
+      <div className={'flex gap-y-5 flex-col mt-5'}>
         <Details step={step} />
         <Project step={step} />
         <Summary sending={sending} step={step} setStep={setStep} />
       </div>
-      <div className={'row-start-2 gap-y-3 flex flex-col'}>
+      <div className={'gap-y-3 flex flex-col h-full'}>
         {failed && (
           <ErrorMessage
             error={{
@@ -43,7 +41,7 @@ const Form = ({ onSubmit, sending, failed, step, setStep }: FormProps) => {
             }}
           />
         )}
-        <div className={'flex justify-center'}>
+        <div className={'flex justify-center mt-10'}>
           {step === 0 && (
             <Buttons isValidStep={canGoToStep1} sending={sending} setStep={setStep} step={step} />
           )}

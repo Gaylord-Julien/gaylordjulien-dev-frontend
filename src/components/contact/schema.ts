@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 // Define the schema with conditional phone field based on 'beContacted' selection
 export const schema = z.object({
+  gender: z.enum(['M', 'F', 'O'], { message: 'Ce champ est requis' }),
   lastName: z
     .string({ message: 'Ce champ est requis' })
     .min(2, { message: 'Votre nom doit contenir au moins 2 caractères' }),

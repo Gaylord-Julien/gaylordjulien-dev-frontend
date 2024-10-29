@@ -26,6 +26,7 @@ const FormField = ({ name, label }: { name: keyof Pick<FormValues, 'message'>; l
             onChange={field.onChange}
             error={errors[name]}
             value={field?.value ?? ''}
+            placeholder={'Décrivez votre projet en quelques mots, vos besoins, vos attentes...'}
           />
         )}
       />

@@ -58,7 +58,7 @@ const FormBreadCrumb = ({ step, setStep }: FormBreadCrumbProps) => {
             type="button"
             onClick={() => setStep(2)}
           >
-            3. Récapitulatif {step === 2 && <CheckIcon />}
+            3. Résumé {step === 2 && <CheckIcon />}
           </button>
         </BreadcrumbItem>
       </BreadcrumbList>

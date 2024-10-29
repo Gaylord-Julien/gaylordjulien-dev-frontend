@@ -4,6 +4,14 @@ import { Input, InputProps } from '@/components/contact/inputs/textInput';
 import { Controller, useFormContext } from 'react-hook-form';
 import ErrorMessage from '@/components/contact/errorMessage';
 import { FormValues } from '@/components/contact/schema';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/contact/inputs/select';
+import { clsx } from 'clsx';
 
 type DetailsProps = {
   step: number;
@@ -40,9 +48,39 @@ const FormField = ({ name, label, ...rest }: FormFieldProps) => {
 };
 
 const Details = ({ step }: DetailsProps) => {
+  const { control, formState, trigger } = useFormContext<FormValues>();
+  const { errors } = formState;
   return (
     step === 0 && (
       <>
+        <Controller
+          name={'gender'}
+          control={control}
+          render={({ field }) => (
+            <Select
+              onValueChange={field.onChange}
+              onOpenChange={(isOpen) => {
+                if (isOpen) {
+                  trigger('gender');
+                }
+              }}
+              value={field.value}
+            >
+              <SelectTrigger
+                className={clsx('w-[180px]', {
+                  'border-destructive': errors?.gender,
+                })}
+              >
+                <SelectValue placeholder="Civilité" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="F">Mme</SelectItem>
+                <SelectItem value="M">M.</SelectItem>
+                <SelectItem value="O">Autre</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
         <FormField name="lastName" label="Nom" type={'text'} />
         <FormField name={'firstName'} label={'Prénom'} type={'text'} />
         <FormField name="email" label="Email" type={'email'} />

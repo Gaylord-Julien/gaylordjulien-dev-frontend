@@ -38,11 +38,7 @@ const Header = async () => {
             <DialogTrigger asChild>
               <Button size="lg">Démarrons un projet</Button>
             </DialogTrigger>
-            <DialogContent
-              className={
-                'w-11/12 sm:max-w-[425px] max-h-[650px] lg:max-w-[780px] lg:w-[850px] lg:max-h-[650px]'
-              }
-            >
+            <DialogContent className={'w-11/12 sm:max-w-[425px] lg:max-w-[780px] lg:w-[850px]'}>
               <DialogHeader>
                 <DialogTitle>Votre projet commence ici</DialogTitle>
                 <DialogDescription className={'pt-5 text-white'}>
